@@ -1,0 +1,21 @@
+**/bin
+**/.DS_Store
+**/.envrc
+**/.history
+**/.terraform
+scratch
+terraform-outputs.yml
+state.yml
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*terraform.tfplan
+*.terraform.lock.hcl
+
+# logs
+*.log
+
+# Directories
+.terraform/
