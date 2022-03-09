@@ -1,8 +1,8 @@
-![image](https://github.com/hendrasutanto/examples/blob/7.0.0-post/images/confluent-logo-300-2.png)
+![image](https://github.com/jakebogie/confluent-cloud-and-azure-demo-setup/images/confluent-logo.png)
 
 # Overview
 
-This Confluent Cloud setup guide will help you to setup a base cluster in your Confluent Cloud account.
+This Confluent Cloud setup guide will help you to setup a base cluster in your Confluent Cloud account running on Azure and ready to integrate Azure connectors.
 
 ![image](architecture-diagram.png)
 
@@ -21,7 +21,7 @@ This Confluent Cloud setup guide will help you to setup a base cluster in your C
 
 # Setup
 
-* Clone the examples GitHub repository and check out the 7.0.0-post branch.
+* Clone this examples GitHub repository and check out the 7.0.0-post branch.
 ```bash
 git clone https://github.com/confluentinc/examples.git
 cd examples
