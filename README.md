@@ -1,4 +1,4 @@
-![image](https://github.com/jakebogie/confluent-cloud-and-azure-demo-setup/images/confluent-logo.png)
+![image](https://github.com/JakeBogie/confluent-cloud-and-azure-demo-setup/blob/main/images/confluent-logo.png)
 
 # Overview
 
