@@ -1,49 +1,43 @@
-![image](https://github.com/JakeBogie/confluent-cloud-and-azure-demo-setup/blob/main/images/confluent-logo.png)
+![image](images/confluent-logo.png)
 
 # Overview
 
-This Confluent Cloud setup guide will help you to setup a base cluster in your Confluent Cloud account running on Azure and ready to integrate Azure connectors.
+This Confluent Cloud setup guide will help you to setup a cluster in your Confluent Cloud account running on Azure and ready to integrate Azure connectors. We will connect to Azure Cosmos DB as part of this demonstration.
 
-![image](architecture-diagram.png)
+![image](images/architecture-diagram.png)
 
 # Prerequisites
 
 * User account in [Confluent Cloud](https://www.confluent.io/confluent-cloud/tryfree/).
 * Local install of the [Confluent CLI](https://docs.confluent.io/confluent-cli/current/install.html) v2.2.0 or later.
-* Local install of the [Docker Desktop](https://docs.docker.com/get-docker/).
-* Local install of the [jq](https://github.com/stedolan/jq/wiki/Installation) tool.
-* AWS account - You'll be creating a fully-managed sink connector to an object storage.
-  - Setup AWS [Access Keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)
-  - Bucket Name - Create the object storage and have the name of the bucket ready.
-  - Region - Note which region you are deploying your object storage resource in.
-  - [IAM policy](https://docs.confluent.io/cloud/current/connectors/cc-s3-sink.html#cc-s3-bucket-policy) configured for bucket access.
 * Local install of the [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+* Local install of the [jq](https://github.com/stedolan/jq/wiki/Installation) tool.
+* An Azure account with an active subscription.
 
 # Setup
 
-* Clone this examples GitHub repository and check out the 7.0.0-post branch.
-```bash
-git clone https://github.com/confluentinc/examples.git
-cd examples
-git checkout 7.0.0-post
+Clone this repository
+```zsh
+git clone https://github.com/JakeBogie/confluent-cloud-and-azure-demo-setup.git
 ```
 
-* Change directory to the cp-quickstart:
-```bash
+Change directory to the cp-quickstart:
+```zsh
 cd cp-quickstart
 ```
 
-* Log in to Confluent Cloud with the command confluent login, and use your Confluent Cloud username and password. The --save argument saves your Confluent Cloud user login credentials or refresh token (in the case of SSO) to the local netrc file.
-```bash
+Log in to Confluent Cloud. The `--save` argument saves your Confluent Cloud user login credentials or refresh token (in the case of SSO) to the local netrc file.
+```zsh
 confluent login --save
 ```
 
-# Step 1 - Setup base cluster
+## Step 1 - Setup base cluster
 
-## Confluent Cloud
+### Confluent Cloud
 
-* Choose the same region where your object storage resource is deployed.
-* This quickstart for Confluent Cloud leverages 100% Confluent Cloud services, including a [ksqlDB application](statements-cloud.sql) which builds streams and tables using Avro, Protobuf and JSON based formats. After logging into the Confluent CLI, run the command below and open your browser navigating to https://confluent.cloud. Note: the demo creates real cloud resources and incurs charges.
+Choose a region where you will deploy your Confluent Cloud cluster along with Azure resources. Make sure they are the same region.
+
+This quickstart for Confluent Cloud leverages 100% Confluent Cloud services, including a [ksqlDB application](statements-cloud.sql) which builds streams and tables using Avro, Protobuf and JSON based formats. After logging into the Confluent CLI, run the command below and open your browser navigating to https://confluent.cloud. Note: the demo creates real cloud resources and incurs charges, make sure to clean up when you are done.
 
 ```bash
 ./start-cloud.sh
@@ -74,7 +68,7 @@ To destroy this demo and its Confluent Cloud resources, call the bash script sto
 
 Any Confluent Cloud example uses real Confluent Cloud resources. After you are done running a Confluent Cloud example, manually verify that all Confluent Cloud resources are destroyed to avoid unexpected charges.
 
-# Step 2 - Setup S3 Sink connector
+## Step 2 - Setup S3 Sink connector
 
 * Within Confluent Cloud, click on Connectors. You should see a list of connectors under Fully Managed.
 * Click on Connect for the Amazon S3 Sink.
@@ -101,7 +95,7 @@ Any Confluent Cloud example uses real Confluent Cloud resources. After you are d
 * View the connector, its status, and metrics on the Connectors page.
 * Now let’s check on your S3 bucket. It could take up to 10 minutes before you can see some records in your S3 bucket.
 
-# Step 3 - Observability setup
+## Step 3 - Observability setup
 
 * Navigate to stack-configs directory and take note of the client properties file (java-service-account-<SERVICE_ACCOUNT_ID>.config) auto-generated in the step above.
 * Switch from cp-quickstart to ccloud-observability by navigate to the examples/ccloud-observability/ directory:
@@ -142,7 +136,7 @@ Any Confluent Cloud example uses real Confluent Cloud resources. After you are d
 
 # Troubleshooting
 
-# Issue #1 - Producer container keeps restarting
+## Issue #1 - Producer container keeps restarting
 
 * Upon inspecting the log, you found an error message similar to the following:
   ```bash
